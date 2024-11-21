@@ -40,6 +40,7 @@ public class Ship {
     return passengerCount;
   }
 
+  // Adds passenger to cruise ship (if ship is not full)
   public boolean addPassenger(Passenger passenger) {
     if (passengerCount < passengerCapacity) {
       passengerCount++;
@@ -49,6 +50,7 @@ public class Ship {
     return false;
   }
 
+  // Remove passenger from cruise ship
   public boolean removePassenger(Passenger passenger) {
     if (passengers.contains(passenger)) {
       passengerCount--;

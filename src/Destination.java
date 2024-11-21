@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Destination {
-  private String name;
-  private ArrayList<Activity> activities = new ArrayList<>();
+  private String name; // Name of location
+  private ArrayList<Activity> activities = new ArrayList<>(); // Stores list of activities at location
 
   public Destination(String name) {
     this.name = name;
@@ -20,11 +20,13 @@ public class Destination {
     return activities;
   }
 
+  // Add activity to location (if not already in list)
   public void addActivity(Activity activity) {
     if (this.activities.contains(activity)) return;
     this.activities.add(activity);
   }
 
+  // Remove activity from location
   public boolean removeActivity(Activity activity) {
     return this.activities.remove(activity);
   }

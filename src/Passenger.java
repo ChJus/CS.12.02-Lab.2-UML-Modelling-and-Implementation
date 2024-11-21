@@ -1,21 +1,24 @@
 import java.util.ArrayList;
 
 public abstract class Passenger {
-  private String name;
-  private int id;
-  private ArrayList<Activity> activities = new ArrayList<>();
-  private ArrayList<Destination> stops = new ArrayList<>();
-  private Ship ship;
+  private String name; // Name of passenger
+  private int id;      // ID of passenger (unique)
+  private ArrayList<Activity> activities = new ArrayList<>(); // List of participating activities
+  private ArrayList<Destination> stops = new ArrayList<>();   // Stops where passenger has activities
+  private Ship ship;  // Ship that passenger is on
 
-  private float balance;
-  private float discountRate;
-  private static int idCounter = 0;
+  private float balance;  // Passenger's balance
+  private float discountRate; // Discount rate (different for different passengers — Premium, Senior, Standard)
+  private static int idCounter = 0; // Global ID counter that increments when new passenger is created, leading to a unique ID per person
 
   protected Passenger(String name, Ship ship, float balance) {
+    // Perform common initialization functionality
     setName(name);
     setShip(ship);
     setBalance(balance);
     setId(Passenger.getIdCounter());
+
+    // Increment ID counter to generate unique ID per passenger
     Passenger.incrementCounter();
   }
 
@@ -70,6 +73,8 @@ public abstract class Passenger {
     }
   }
 
+  // Checks if passenger has an activity at a specific location
+  // This is used to check if they still can sign up for an activity at a location
   public boolean hasActivityAtLocation(Destination location) {
     return stops.contains(location);
   }
@@ -87,10 +92,12 @@ public abstract class Passenger {
     return false;
   }
 
+  // Checks if passenger is in an activity
   public boolean hasActivity(Activity activity) {
     return activities.contains(activity);
   }
 
+  // Return the locations where the passenger has an activity
   public ArrayList<Destination> getStops() {
     return stops;
   }
@@ -119,6 +126,7 @@ public abstract class Passenger {
     this.balance -= cost;
   }
 
+  // Check if passenger has enough money to sign up for an activity
   public boolean hasEnoughMoneyForActivity(Activity activity) {
     return (activity.getCost() * this.discountRate) <= getBalance();
   }

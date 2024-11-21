@@ -1,12 +1,14 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.TreeMap;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CruiseTest {
+  Random rand = new Random(); // Generate random details for each object
+
   /*
     Scenario description:
     - The ship 'Titanic' has a passenger capacity 1000
@@ -23,7 +25,6 @@ public class CruiseTest {
   @Test
   void main() {
     // Test Ship class methods
-    Random rand = new Random(); // Generate random details for each object
     Ship ship = new Ship("Titanic", 1000);
 
     for (int i = 0; i < 10; i++) { // Add 10 arbitrary PremiumPassengers
@@ -120,6 +121,35 @@ public class CruiseTest {
           assertEquals(Math.round(balance), Math.round(passenger.getBalance()));
         }
       }
+    }
+  }
+
+  // Tests to see if ship rejects additional passengers when full
+  @Test
+  void miniTest1() {
+    Ship ship = new Ship("Titanic", 1);
+    assertTrue(ship.addPassenger(new PremiumPassenger("" + rand.nextLong(), ship, Math.abs(rand.nextFloat(500, 1000)))));
+    assertFalse(ship.addPassenger(new PremiumPassenger("" + rand.nextLong(), ship, Math.abs(rand.nextFloat(500, 1000)))));
+    assertEquals(1, ship.getPassengerCount());
+  }
+
+  // Ensure each passenger has a unique ID
+  // Even after performing add and remove operations on ship's passenger list
+  @Test
+  void miniTest2() {
+    Ship ship = new Ship("Titanic", 10000);
+    for (int i = 0; i < 10000; i++) {
+      Passenger passenger = new StandardPassenger("" + rand.nextLong(), ship, Math.abs(rand.nextFloat(500, 1000)));
+      ship.addPassenger(passenger);
+      if (rand.nextDouble() > 0.4) {
+        ship.removePassenger(passenger);
+      }
+    }
+
+    ArrayList<Integer> ids = new ArrayList<>();
+    for (int i = 0; i < ship.getPassengerCount(); i++) {
+      assertFalse(ids.contains(ship.getPassengers().get(i).getId()));
+      ids.add(ship.getPassengers().get(i).getId());
     }
   }
 }
