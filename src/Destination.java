@@ -4,18 +4,22 @@ public class Destination {
   private String name; // Name of location
   private ArrayList<Activity> activities = new ArrayList<>(); // Stores list of activities at location
 
+  // Create new Destination based on name
   public Destination(String name) {
     this.name = name;
   }
 
+  // Returns Destination name
   public String getName() {
     return name;
   }
 
+  // Changes Destination name
   public void setName(String name) {
     this.name = name;
   }
 
+  // Returns activities at destination
   public ArrayList<Activity> getActivities() {
     return activities;
   }
@@ -42,6 +46,7 @@ public class Destination {
     return false;
   }
 
+  // Prints details of Destination (name, activities)
   public void printDetails() {
     System.out.println();
     System.out.println(name);

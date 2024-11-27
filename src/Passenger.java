@@ -22,34 +22,42 @@ public abstract class Passenger {
     Passenger.incrementCounter();
   }
 
+  // Returns unique ID number that can be used for new passenger
   protected static int getIdCounter() {
     return idCounter;
   }
 
+  // Increments ID number (so it is unique per passenger)
   protected static void incrementCounter() {
     idCounter++;
   }
 
+  // Decrements ID number (can be used when a passenger is removed)
   protected static void decrementCounter() {
     idCounter--;
   }
 
+  // Returns passenger name
   public String getName() {
     return name;
   }
 
+  // Changes passenger name
   public void setName(String name) {
     this.name = name;
   }
 
+  // Returns passenger ID
   public int getId() {
     return id;
   }
 
+  // Changes passenger ID
   protected void setId(int id) {
     this.id = id;
   }
 
+  // Returns activities of passenger
   public ArrayList<Activity> getActivities() {
     return activities;
   }
@@ -102,26 +110,32 @@ public abstract class Passenger {
     return stops;
   }
 
+  // Returns ship passenger is on
   public Ship getShip() {
     return ship;
   }
 
+  // Changes passenger's ship
   public void setShip(Ship ship) {
     this.ship = ship;
   }
 
+  // Returns passenger's balance
   public float getBalance() {
     return balance;
   }
 
+  // Changes passenger's balance
   public void setBalance(float balance) {
     this.balance = balance;
   }
 
+  // Top up passenger balance by amount
   public void topup(float money) {
     this.balance += money;
   }
 
+  // Deduct passenger balance by amount
   public void deduct(float cost) {
     this.balance -= cost;
   }
@@ -131,6 +145,7 @@ public abstract class Passenger {
     return (activity.getCost() * this.discountRate) <= getBalance();
   }
 
+  // Print details about passenger (name, id, balance, discount rate, activities signed and cost)
   public void printDetails() {
     System.out.println(name + " [id: " + id + "]" + " [balance: " + balance + "]" + " [discountRate: " + discountRate + "]");
     for (Activity activity : activities) {
@@ -139,6 +154,8 @@ public abstract class Passenger {
     }
   }
 
+  // Allows subclasses to alter discount rate
+  // E.g., Senior Passengers (10% off), Premium Passengers (free), Standard Passengers (0% off)
   protected void setDiscountRate(float discountRate) {
     this.discountRate = discountRate;
   }

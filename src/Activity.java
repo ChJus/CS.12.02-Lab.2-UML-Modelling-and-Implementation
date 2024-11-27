@@ -9,48 +9,61 @@ public abstract class Activity {
   private Destination location;     // Location of activity
   private final ArrayList<Passenger> participants = new ArrayList<>(); // List of participants attending activity
 
+  // Returns the Activity name
   public String getName() {
     return name;
   }
 
+  // Changes the name of the Activity
   public void setName(String name) {
     this.name = name;
   }
 
+  // Returns the Activity description
   public String getDescription() {
     return description;
   }
 
+  // Changes the Activity description
   public void setDescription(String description) {
     this.description = description;
   }
 
+  // Returns the Activity cost
   public float getCost() {
     return cost;
   }
 
+  // Changes the Activity cost
   public void setCost(float cost) {
     this.cost = cost;
   }
 
+  // Returns the Activity maximum capacity
   public int getCapacity() {
     return capacity;
   }
 
+  // Changes the Activity maximum capacity
   public void setCapacity(int capacity) {
     this.capacity = capacity;
   }
 
+  // Returns the number of participants signed up to Activity
   public int getParticipantCount() {
     return participantCount;
   }
 
+  // Returns location of Activity
   public Destination getLocation() {
     return location;
   }
 
+  // Changes location of Activity
   public void setLocation(Destination location) {
+    this.location.removeActivity(this);
     this.location = location;
+    this.location.addActivity(this);
   }
 
   // Returns whether the activity is full (reached maximum capacity)
