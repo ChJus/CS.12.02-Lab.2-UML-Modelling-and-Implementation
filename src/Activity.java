@@ -61,7 +61,7 @@ public abstract class Activity {
 
   // Changes location of Activity
   public void setLocation(Destination location) {
-    this.location.removeActivity(this);
+    if (this.location != null) this.location.removeActivity(this);
     this.location = location;
     this.location.addActivity(this);
   }
